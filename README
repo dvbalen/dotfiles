@@ -1,0 +1,15 @@
+Config files
+============
+
+VIM
+---
+Started with:
+
+https://begriffs.com/posts/2019-07-19-history-use-vim.html
+
+
+INSTALL
+-------
+
+cp vimrc ~/.vimrc
+mkdir -p ~/.vim/{swap,undodir,backup}
