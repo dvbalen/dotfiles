@@ -1,0 +1,118 @@
+Windows Registry Editor Version 5.00
+; ------------------------------------------------------------------------------
+; Based on Pretty Putty           github.com/JacKTrocinskI
+;             
+; ------------------------------------------------------------------------------
+
+; Replace "FOO%20BAR" with the PuTTY session name you would like to modify.
+[HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\FOO%20BAR]
+
+; Color options
+"ANSIColour"=dword:00000001
+"Xterm256Colour"=dword:00000001
+"BoldAsColour"=dword:00000000
+"TryPalette"=dword:00000000
+"UseSystemColours"=dword:00000000
+
+;; Gruvbox dark-hard theme
+"Colour0"="235,219,178"
+"Colour1"="235,219,178"
+"Colour2"="50,48,47"
+"Colour3"="50,48,47"
+"Colour4"="50,48,47"
+"Colour5"="235,219,178"
+"Colour6"="50,48,47"
+"Colour7"="146,131,116"
+"Colour8"="204,36,29"
+"Colour9"="251,73,52"
+"Colour10"="152,151,26"
+"Colour11"="184,187,38"
+"Colour12"="215,153,33"
+"Colour13"="250,189,47"
+"Colour14"="69,133,136"
+"Colour15"="131,165,152"
+"Colour16"="177,98,134"
+"Colour17"="211,134,155"
+"Colour18"="104,157,106"
+"Colour19"="142,192,124"
+"Colour20"="168,153,132"
+"Colour21"="235,219,178"
+
+;; Gruvbox dark-hard theme
+;"Colour0"="235,219,178"
+;"Colour1"="235,219,178"
+;"Colour2"="29,32,33"
+;"Colour3"="29,32,33"
+;"Colour4"="29,32,33"
+;"Colour5"="235,219,178"
+;"Colour6"="29,32,33"
+;"Colour7"="146,131,116"
+;"Colour8"="204,36,29"
+;"Colour9"="251,73,52"
+;"Colour10"="152,151,26"
+;"Colour11"="184,187,38"
+;"Colour12"="215,153,33"
+;"Colour13"="250,189,47"
+;"Colour14"="69,133,136"
+;"Colour15"="131,165,152"
+;"Colour16"="177,98,134"
+;"Colour17"="211,134,155"
+;"Colour18"="104,157,106"
+;"Colour19"="142,192,124"
+;"Colour20"="168,153,132"
+;"Colour21"="235,219,178"
+;
+;; Gruvbox dark-medium theme
+;"Colour0"="235,219,178"
+;"Colour1"="235,219,178"
+;"Colour2"="40,40,40"
+;"Colour3"="40,40,40"
+;"Colour4"="40,40,40"
+;"Colour5"="235,219,178"
+;"Colour6"="40,40,40"
+;"Colour7"="146,131,116"
+;"Colour8"="204,36,29"
+;"Colour9"="251,73,52"
+;"Colour10"="152,151,26"
+;"Colour11"="184,187,38"
+;"Colour12"="215,153,33"
+;"Colour13"="250,189,47"
+;"Colour14"="69,133,136"
+;"Colour15"="131,165,152"
+;"Colour16"="177,98,134"
+;"Colour17"="211,134,155"
+;"Colour18"="104,157,106"
+;"Colour19"="142,192,124"
+;"Colour20"="168,153,132"
+;"Colour21"="235,219,178"
+
+;; Other themes https://github.com/AlexAkulov/putty-color-themes
+
+; 256 color support
+"TerminalType"="putty-256color"
+
+; UTF-8 character support
+"LineCodePage"="UTF-8"
+"UTF8Override"=dword:00000001
+
+; Consolas 12pt ClearType font
+"Font"="Consolas"
+"FontHeight"=dword:0000000c
+"FontQuality"=dword:00000003
+
+; Linux style copy-and-pasting (middle click to paste)
+"MouseIsXterm"=dword:00000001
+
+; Scrollback buffer set to 2000 lines
+"ScrollbackLines"=dword:000007d0
+
+; Seconds between keepalives set to 59
+"PingInterval"=dword:00000000
+"PingIntervalSecs"=dword:0000003b
+
+; Mouse pointer hides while typing
+"HideMousePtr"=dword:00000001
+
+; Initial window size set to 80x40
+"TermHeight"=dword:00000028
+"TermWidth"=dword:00000050
