@@ -1,0 +1,18 @@
+# Universal-ctags 
+# brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+--langdef=yaml
+--langmap=yaml:.yml.yaml
+--kinddef-yaml=s,section,sections
+--kinddef-yaml=e,entry,entries
+--regex-yaml=/^([a-zA-Z0-9_\/-]+):/\1/s/{scope=set}
+--regex-yaml=/^ *- (name: .*)$/\1/e/{scope=ref}
+
+--langdef=ansible
+--langmap=ansible:.yml.yaml
+--regex-ansible=/^\s*- name:(.*)/\1/t,task/
+
+--langdef=markdown
+--langmap=markdown:.md.mkd
+--regex-markdown=/^#[ \t]+(.*)/\1/h,Heading_L1/
+--regex-markdown=/^##[ \t]+(.*)/\1/i,Heading_L2/
+--regex-markdown=/^###[ \t]+(.*)/\1/k,Heading_L3/
