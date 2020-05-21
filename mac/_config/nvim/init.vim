@@ -11,8 +11,10 @@ endif
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-vinegar'
 Plug 'morhetz/gruvbox'
 Plug 'majutsushi/tagbar'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 
 filetype plugin indent on
@@ -57,6 +59,32 @@ set undodir^=~/.comfig/nvim/undo//
 if has("patch-8.1.0360")
 	set diffopt+=internal,algorithm:patience
 endif
+
+" Colors
+
+" Custom highlighting
+function! MyHighlights() abort
+    " Try to use more subdued colors in vimdiff mode
+    highlight DiffAdd cterm=bold ctermfg=142 ctermbg=235 gui=NONE guifg=#b8bb26 guibg=#3c3c25
+    highlight DiffChange cterm=bold ctermfg=108 ctermbg=235 gui=NONE guifg=#8ec07c guibg=#383228
+    highlight DiffText cterm=NONE ctermfg=214 ctermbg=235 gui=NONE guifg=#fabd2f guibg=#483D28
+    highlight DiffDelete cterm=bold ctermfg=167 ctermbg=235 gui=NONE guifg=#fb4934 guibg=#372827
+
+    " Use Gruvbox colors for python semshi semantic highlighter
+    hi semshiGlobal          ctermfg=167 guifg=#fb4934
+    hi semshiImported        ctermfg=214 guifg=#fabd2f cterm=bold gui=bold
+    hi semshiParameter       ctermfg=142  guifg=#98971a
+    hi semshiParameterUnused ctermfg=106 guifg=#665c54
+    hi semshiBuiltin         ctermfg=208 guifg=#fe8019
+    hi semshiAttribute       ctermfg=108  guifg=fg
+    hi semshiSelf            ctermfg=109 guifg=#85a598
+    hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+endfunction
+
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme * call MyHighlights()
+augroup END
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
