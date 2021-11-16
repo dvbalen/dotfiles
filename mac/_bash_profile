@@ -1,4 +1,25 @@
+# @TODO change username!
+
+# Tell mac not to remind me zsh is the default shell
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Tell nvim where to find its config
 export XDG_DATA_HOME=~/.config
+
+export PATH=/Users/vanbalend/homebrew/bin:${PATH}
+
+# Homebrew
+#export HOMEBREW_CASK_OPTS="--appdir=/Users/vanbalend/BrewApps"
+#export HOMEBREW_PREFIX=/Users/vanbalend/homebrew/bin
+
+# Fancy prompt
+eval "$( starship init bash )"
+
+# Pyenv
+eval "$( pyenv init --path )"
 eval "$( pyenv init - )"
 eval "$( pyenv virtualenv-init - )"
-eval "$( starship init bash )"
+
+# Make sure homebrew doesn't trip on pyenv
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
