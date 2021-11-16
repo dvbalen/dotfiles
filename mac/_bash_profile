@@ -1,3 +1,4 @@
 export XDG_DATA_HOME=~/.config
 eval "$( pyenv init - )"
 eval "$( pyenv virtualenv-init - )"
+eval "$( starship init bash )"
