@@ -1,0 +1,31 @@
+" Vim counterpart to nvim config  Vim 8.2.4780 or newer is recommended.
+scriptencoding utf-8
+
+let mapleader = " "
+let maplocalleader = " "
+
+let s:config_root = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+execute 'set runtimepath^=' . fnameescape(s:config_root)
+execute 'set packpath^=' . fnameescape(s:config_root)
+
+function! s:Source(relative_path) abort
+  execute 'source ' . fnameescape(s:config_root . '/' . a:relative_path)
+endfunction
+
+call s:Source('config/options.vim')
+call s:Source('config/autocmds.vim')
+
+" Define plugin settings and User autocommands before loading native packages.
+call s:Source('config/plugins/lsp.vim')
+call s:Source('config/plugins/git.vim')
+call s:Source('config/plugins/vista.vim')
+call s:Source('config/plugins/completion.vim')
+
+" This is needed when this directory is used with `vim -Nu .../vimrc` rather
+" than installed as ~/.vim.
+packloadall
+
+call s:Source('config/theme.vim')
+call s:Source('config/statusline.vim')
+call s:Source('config/keymaps.vim')
+
