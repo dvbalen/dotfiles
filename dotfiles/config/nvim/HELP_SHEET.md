@@ -29,6 +29,26 @@ maintenance commands are:
 The first command updates plugins. Updating `nvim-treesitter` also triggers a
 parser update.
 
+### Suspending and resuming
+
+Press `Ctrl-Z` in Normal mode to suspend Neovim, then run `fg` in the shell
+to return. The configuration saves `guicursor` before suspension, uses a
+steady block cursor for the shell, and restores the saved settings with a
+redraw after resuming. If cursor styling is disabled (`guicursor` is empty),
+it remains disabled.
+
+A cursor that looks like Replace mode does not necessarily indicate Replace
+mode. Check the statusline: `Normal`, `Insert`, and `Replace` report the
+editor's actual mode. Press `Esc` to leave Replace mode if it is active.
+If only the cursor shape is wrong, inspect the configuration with:
+
+```vim
+:verbose set guicursor?
+```
+
+Cursor restoration depends on the terminal supporting cursor-style control
+sequences. See the [Neovim cursor restoration FAQ](https://neovim.io/doc/user/faq/#cursor-style-isnt-restored-after-exiting-or-suspending-and-resuming-nvim).
+
 ## Python and BasedPyright
 
 The configuration starts `basedpyright-langserver` when it is on `PATH`, with
@@ -67,6 +87,27 @@ Diagnostics are underlined, sorted by severity, and displayed as virtual text
 on the current line. The configuration does not automatically format files or
 select a project's test command. If an external command changes an open file,
 run `:checktime` to reload it.
+
+### Python indentation
+
+Python uses Neovim's built-in indentation engine. The configuration keeps
+Python's legacy syntax information available alongside Tree-sitter
+highlighting because the indentation engine uses it to ignore parentheses,
+braces, and brackets inside strings and comments. Without that information,
+a string such as `message = "opening ("` can incorrectly push the next line
+far to the right.
+
+Check the active engine and syntax information with:
+
+```vim
+:setlocal indentexpr? syntax?
+```
+
+The expected values are `python#GetIndent(v:lnum)` and `python`. In an
+already-open Python buffer, `:setlocal syntax=python` restores the syntax
+information immediately. This correction does not change indentation widths
+or the separate continuation-indent preferences described in
+`:help ft-python-indent`.
 
 ## Bash language support
 
@@ -404,6 +445,37 @@ use the Git CLI for repository-level work:
 :terminal git diff --staged
 :terminal git commit
 ```
+## See what changed in a buffer before saving
+
+If you want to view a quick, standard diff output in the command-line area
+without splitting your windows, you can pipe the buffer contents directly to
+the external diff utility:
+
+```vim
+ :w !diff % -
+ ```
+
+How it works:
+* :w ! sends the unsaved buffer contents to an external shell command.
+* diff compares files.
+* % represents the saved file path on disk.
+* - tells the diff utility to accept the incoming buffer text from standard input.
+
+Otherwise Neovim includes a default user command that creates a vertical split, reads the
+original file from disk into a scratch buffer, and opens them side-by-side in
+vimdiff mode.
+
+```vim
+:DiffOrig diff-originl-file
+```
+defined as
+
+```vim
+`vim.api.nvim_create_user_command('DiffOrig', function()
+  vim.cmd('vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis | wincmd p | diffthis')
+end, {})
+````
+
 
 
 Vinegar keeps file navigation lightweight: press `-` in a normal file buffer
