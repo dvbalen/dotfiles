@@ -34,6 +34,12 @@ vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true }),
   pattern = filetypes,
   callback = function(event)
-    pcall(vim.treesitter.start, event.buf)
+    local started = pcall(vim.treesitter.start, event.buf)
+    if started and vim.bo[event.buf].filetype == "python" then
+      -- Tree-sitter clears 'syntax', but python#GetIndent() uses synstack()
+      -- to ignore brackets in strings and comments. Keep that information
+      -- available alongside Tree-sitter highlighting.
+      vim.bo[event.buf].syntax = "python"
+    end
   end,
 })
